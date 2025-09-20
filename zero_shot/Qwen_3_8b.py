@@ -13,7 +13,7 @@ import gc
 HF_API_KEY = "" # Hugging_face Token
 TARGET_GPU = "" # Target GPU node
 INPUT_CSV_PATH = "" # Dataset file path
-OUTPUT_DIR = "" #output directory
+OUTPUT_DIR = "" # Output Directory
 COMMENT_COLUMN_NAME = "comment"
 GROUND_TRUTH_COLUMN_NAME = "level-1"
 BATCH_SIZE = 16
