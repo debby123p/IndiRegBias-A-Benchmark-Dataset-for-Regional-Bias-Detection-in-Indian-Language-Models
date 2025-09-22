@@ -5,7 +5,7 @@ Our goal is to make LLMs aware of regional bias in Indian content and improve th
 
 ## Dataset
 
-A core contribution of this research is a new, culturally-specific dataset of user-generated comments for detecting regional bias.
+A key contribution of this research is a new, culturally specific dataset of user-generated comments for detecting regional bias.
 
 - Data Source: Over 200,000 comments were collected from Reddit and YouTube.
 
@@ -28,16 +28,16 @@ Level 3: State Identification: The name of the Indian state being targeted in th
 ### Data Analysis Highlights
 
 - Out of 25,000 comments,13,020 (52.1%) contained regional bias.
-  ![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Binary%20Classification%20(3).png)
+  ![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Images/Binary%20Classification%20(3).png)
   
 - Severity breakdown of biased comments:
-  ![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Binary%20Classification%20(4).png)
+  ![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Images/Binary%20Classification%20(4).png)
 
 - Region-wise distribution
-  ![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Binary%20Classification%20(5).png)
+  ![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Images/Binary%20Classification%20(5).png)
   
 - State-wise distribution 
-  ![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Binary%20Classification%20(6).png)
+  ![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Images/Binary%20Classification%20(6).png)
 
 
 ### High severity level for states and regions
@@ -51,24 +51,24 @@ The analysis of biased comments revealed several recurring negative themes and s
 - Social Intolerance: Haryana and Uttar Pradesh were often associated with social intolerance, specifically misogyny and casteism.
 
 
-- Socio-Economic Failure: Bihar and Uttar Pradesh were commonly labeled as socio-economically "failed" or "backward".
+- Socio-Economic Failure: Bihar and Uttar Pradesh were commonly labelled as socio-economically "failed" or "backward".
 
 
 The following is the distribution of the comments for different states and regions with higher percentages of severe comments:
- ![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Binary%20Classification%20(7).png)
+ ![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Images/Binary%20Classification%20(7).png)
 
 ### Underrepresentation of Some States
 The data showed a lower volume of comments related to certain smaller states. This disparity can be attributed to two primary factors:
 
 - Geographic and Digital Barriers: Challenging terrain and lower population density in these regions can limit internet access, resulting in a smaller overall digital footprint.
 
-- Marginalization in National Discourse: The online narrative is often dominated by larger states, which can lead to the systematic sidelining of issues and voices from smaller regions.
+- Marginalisation in National Discourse: The online narrative is often dominated by larger states, which can lead to the systematic sidelining of issues and voices from smaller regions.
 
 The following is the distribution of the comments for different states and regions with the lowest number of  comments:
- ![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Binary%20Classification%20(8).png)
+ ![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Images/Binary%20Classification%20(8).png)
 
 ## Methodology
-The project's methodology is centered around a zero-shot classification experiment to evaluate the performance of various prominent LLMs.
+The project's methodology is centred around a zero-shot classification experiment to evaluate the performance of various prominent LLMs.
 
 
 
@@ -76,7 +76,7 @@ The project's methodology is centered around a zero-shot classification experime
 
 
 
-- Prompting: A uniform prompt was engineered to guide the models, employing a chain-of-thought to ask them to analyze comments for regional stereotypes.
+- Prompting: A uniform prompt was engineered to guide the models, employing a chain-of-thought to ask them to analyse comments for regional stereotypes.
 
 
 
@@ -102,14 +102,14 @@ Eight prominent LLMs were selected for their instruction-following and reasoning
 - microsoft/Phi-4-mini-reasoning(4b) 
 
 ## Results
-The models were run on the entire dataset of 25,000 comments. The performance for binary bias detection is summarized below
-![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Mid-Sem%20Evaluation%20Presentation.png)
+The models were run on the entire dataset of 25,000 comments. The performance for binary bias detection is summarised below
+![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Images/Mid-Sem%20Evaluation%20Presentation.png)
 
 ### Key Findings
 
 - Top Performers: The Qwen models (14B and 8B) were the most effective, demonstrating high accuracy and a balanced ability to handle the task.
 
-- Inherently Biased Models: Some models, like Google's Gemma and DeepSeek-R1, were found to be severely biased themselves. They were hypersensitive in identifying bias and almost incapable of recognizing non-biased content.
+- Inherently Biased Models: Some models, like Google's Gemma and DeepSeek-R1, were found to be severely biased themselves. They were hypersensitive to identifying bias and almost incapable of recognising unbiased content.
 
 - Weakest Models: Meta's Llama-3.2 showed weak performance, while Microsoft's Phi-4-mini was a "catastrophic failure," classifying nearly all content as non-regional.
 
