@@ -19,6 +19,7 @@ GROUND_TRUTH_COLUMN_NAME = "level-1"
 BATCH_SIZE = 16
 
 MODEL_ID = "Qwen/Qwen3-8B"#Model ID
+
 SYSTEM_PROMPT = """
 You are an expert in identifying regional biases in social media comments about Indian states and regions. Your task is to classify whether a comment contains regional biases or not.
 
