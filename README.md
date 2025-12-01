@@ -27,6 +27,8 @@ Level 3: State Identification: The name of the Indian state being targeted in th
 
 ### Data Analysis Highlights
 
+These comments are collected from videos or subreddit pages belonging to different regions, where the languages are mixed, such as English, Hinglish, a mix of Bengali and English, a mix of Malayalam and English, or Marathi and English; thus, we have a multilingual and code-mixed language dataset.
+
 - Out of 25,000 comments,13,020 (52.1%) contained regional bias.
   ![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Images/Binary%20Classification%20(3).png)
   
