@@ -21,7 +21,7 @@ CONFIG = {
 BASE_DIR = "" # Base directory to the data
 OUTPUT_DIR = "" # Output directory
 INPUT_DATA = os.path.join(BASE_DIR, "path_to_the_dataset") # Dataset file path
-FEW_SHOT_SOURCE = [os.path.join(BASE_DIR, "path_to_the_support_examples")] # Output Directory
+FEW_SHOT_SOURCE = [os.path.join(BASE_DIR, "path_to_the_support_examples")] # Support file path
 
 # Saving the results
 PARTIAL_OUTPUT = os.path.join(OUTPUT_DIR, "classification_results_in_progress.csv")
@@ -73,7 +73,7 @@ Format: "Reasoning: [text] ... Classification: [0 or 1]"
 """
 
 def get_model_and_tokenizer(model_id, device):
-    """Load 4-bit quantized model and tokenizer."""
+    """Load 4-bit quantised model and tokenizer."""
     bnb_config = BitsAndBytesConfig(
         load_in_4bit=True,
         bnb_4bit_compute_dtype=torch.bfloat16
@@ -133,7 +133,7 @@ def extract_prediction(response_text):
     return reasoning, prediction
 
 def generate_report(csv_path):
-    """Generate metrics and confusion matrix from results."""
+    """Save classification report and confusion matrix."""
     if not os.path.exists(csv_path):
         return
 
@@ -184,7 +184,7 @@ def main():
             batch = df_process.iloc[i:i+batch_size]
             prompts = []
             
-            # Prepare Prompts
+            # Prepare Prompt
             for _, row in batch.iterrows():
                 user_content = f"{few_shot_prompt}\n--- Classify ---\nComment: \"{row['comment']}\""
                 chat = [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": user_content}]
@@ -194,7 +194,6 @@ def main():
             inputs = tokenizer(prompts, return_tensors="pt", padding=True, truncation=True, max_length=4096).to(device)
             
             try:
-                # Generate
                 outputs = model.generate(
                     inputs.input_ids,
                     attention_mask=inputs.attention_mask,
@@ -216,7 +215,7 @@ def main():
                         'reasoning': reasoning
                     })
                 
-                # Save Progress
+                # Saving Progress
                 pd.DataFrame(results).to_csv(
                     PARTIAL_OUTPUT, 
                     mode='a', 
