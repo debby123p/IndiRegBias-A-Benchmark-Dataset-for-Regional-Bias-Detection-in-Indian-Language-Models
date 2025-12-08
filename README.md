@@ -7,7 +7,7 @@ Our goal is to make LLMs aware of regional bias in Indian content and improve th
 
 A key contribution of this research is a new, culturally specific dataset of user-generated comments for detecting regional bias.
 
-- Data Source: Over 200,000 comments were collected from Reddit and YouTube.
+- Data Source: Comments collected from Reddit and YouTube.
 
 - Final Size: After cleaning, the final dataset consists of 25,000 user comments.
   
@@ -27,47 +27,15 @@ Level 3: State Identification: The name of the Indian state being targeted in th
 
 ### Data Analysis Highlights
 
-These comments are collected from videos or subreddit pages belonging to different regions, where the languages are mixed, such as English, Hinglish, a mix of Bengali and English, a mix of Malayalam and English, or Marathi and English; thus, we have a multilingual and code-mixed language dataset.
+These comments are collected from videos or subreddit pages belonging to different regions, where the languages are mixed, such as English, Hinglish (a mix of Hindi and English), a mix of Bengali and English, a mix of Malayalam and English, or Marathi and English; thus, we have a multilingual and code-mixed language dataset.
 
-- Out of 25,000 comments,13,020 (52.1%) contained regional bias.
-  ![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Images/Binary%20Classification%20(1).png)
+- Out of 25,000 comments,13,020 (52.1%) contained regional biases, and 11,980 (47.9%) contained non-regional biases.
   
-- Severity breakdown of biased comments:
-  ![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Images/Binary%20Classification%20(3).png)
+- Severity breakdown of biased comments is as Mild (3,747 comments), Moderate (6,663 comments), and Severe (2,610 comments).
 
-- Region-wise distribution
-  ![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Images/Binary%20Classification%20(4).png)
-  
-- State-wise distribution 
-  ![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Images/Binary%20Classification%20(5).png)
+- The data also showed the distribution of comments across different regions of India, with a large number of biased comments found for South India (5,802 comments) and North India (3,906 comments).
 
-
-### High severity level for states and regions
-
-The analysis of biased comments revealed several recurring negative themes and stereotypes targeting specific states:
-
-
-- Crime and Corruption: States like Delhi and Uttar Pradesh were frequently stereotyped as hubs of crime and corruption.
-
-
-- Social Intolerance: Haryana and Uttar Pradesh were often associated with social intolerance, specifically misogyny and casteism.
-
-
-- Socio-Economic Failure: Bihar and Uttar Pradesh were commonly labelled as socio-economically "failed" or "backward".
-
-
-The following is the distribution of the comments for different states and regions with higher percentages of severe comments:
- ![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Images/Binary%20Classification%20(6).png)
-
-### Underrepresentation of Some States
-The data showed a lower volume of comments related to certain smaller states. This disparity can be attributed to two primary factors:
-
-- Geographic and Digital Barriers: Challenging terrain and lower population density in these regions can limit internet access, resulting in a smaller overall digital footprint.
-
-- Marginalisation in National Discourse: The online narrative is often dominated by larger states, which can lead to the systematic sidelining of issues and voices from smaller regions.
-
-The following is the distribution of the comments for different states and regions with the lowest number of  comments:
- ![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Images/Binary%20Classification%20(7).png)
+- In the state-wise breakdown, Kerala emerged as the most represented state with 1,841 comments, followed by Goa (1,103) and West Bengal (1,072).
 
 ## Methodology
 The project's methodology is centred around a zero-shot classification experiment to evaluate the performance of various prominent LLMs.
