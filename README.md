@@ -38,48 +38,25 @@ These comments are collected from videos or subreddit pages belonging to differe
 - In the state-wise breakdown, Kerala emerged as the most represented state with 1,841 comments, followed by Goa (1,103) and West Bengal (1,072).
 
 ## Methodology
-The project's methodology is centred around a zero-shot classification experiment to evaluate the performance of various prominent LLMs.
 
-- Zero-Shot Setting: This experimental setup starts with curating a prompt that follows the Chain-of-Thought prompting technique for the classification of comments into different class labels. The experiments under this were conducted using the 16-bit, that is, the full-precision models.
+We deployed a series of experiments in the following setting with the Chain-of-thought (CoT) prompting technique for the classification of level-1 and level-2 annotations:
+
+- Zero-Shot Setting
+
+- Few-Shot Setting
+
+- Fine-Tuning (Using Parameter-Efficient Fine-Tuning (PEFT) and Low-Rank Adaptation (LoRA))
   
-- Few-Shot Setting: Along with a prompt that follows the Chain-of-Thought prompting for the final inferencing task. The experiments under this were conducted using the 4-bit quantisation of the model.
-
-- Fine-Tuning: This approach helps us to utilise our curated dataset on the base large language model by training it on our dataset. This helps to make the model gain expertise in recognising the task we are targeting, which is the classification of comments into regional bias or non-regional bias or understanding the severity levels of the comments. The following are the experimental techniques deployed:
-
-  1) Parameter-Efficient Fine-Tuning (PEFT) and Low-Rank Adaptation (LoRA)
-Full fine-tuning of models with billions of parameters (e.g., Qwen3-8B) requires immense video memory (VRAM) and computational time to update all weights. To address this, we utilised Parameter-Efficient Fine-Tuning (PEFT). We implement Low-Rank Adaptation (LoRA), which is one of the techniques of Parameter-Efficient Fine-Tuning (PEFT).
-
-     1) Experiment 1: Instruction-Based Supervised Fine-Tuning (SFT)
-        
-        For the binary classification task, we utilised instruction-based supervised fine-tuning(SFT). In this approach, data is formatted as a ”chat” or interaction, and we provide instructions to the model through               system messages for the classification of the comment by predicting the next token. Through the training phase, it goes through instruction-response pairs and then generates the write token for each comment in the         test set.
-        
-             • System Message: Sets the context (e.g., ”You are a helpful assistant... Your task is to classify...”).
-        
-             • User Message: Provides the specific input (e.g., ”Please classify the following comment: {comment}”).
-        
-             • Assistant Response: The model is trained to generate the ideal classification (e.g., ”Regional Bias”).
-        
-        The hyperparameters used for this experimental setup are detailed in the following table.
-         ![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Images/Binary%20Classification%20(9).png)
-
-
-     2) Experiment 2: Classification-Based Supervised Fine-Tuning (SFT)
-        
-        For the severity classification task (Mild, Moderate, Severe), we adopted a classification-based Supervised Fine-Tuning approach. The LLMs have a generative layer to predict the next token based on the                     instruction; this layer has been removed and replaced with a classification head. This new layer will robustly predict a number from 1 to 3 for the three class labels based on the instruction.
-
-        The hyperparameters used for this experimental setup are detailed in the following table.
-         ![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Images/Binary%20Classification%20(10).png)
+      - Instruction-Based Supervised Fine-Tuning (SFT) for Binary Classification
+  
+      - Classification-Based Supervised Fine-Tuning (SFT) for Multi-class Classification 
 
 ### Models Evaluated
 Eight prominent LLMs were selected for their instruction-following and reasoning abilities:
 
 - Qwen/Qwen3-8B 
 
-- Qwen/Qwen3-14B 
-
 - mistralai/Mistral-7B-Instruct-v0.3 
-
-- google/gemini-2.5-pro 
 
 - meta-llama/Llama-3.2-3B 
 
@@ -95,11 +72,11 @@ Eight prominent LLMs were selected for their instruction-following and reasoning
 
 1) Zero-Shot Results
 
-   The results for the models are presented in the zero-shot setting in the table.
-
+   The results for the models are presented in the zero-shot setting in the table. The codes for which are available in the folder named zero-shot-binary-classification, which is in https://github.com/debby123p/CAN-LARGE-LANGUAGE-MODELS-DETECT-INDIAN-REGIONAL-BIAS-DATASET-ANALYSIS/tree/main/zero_shot.
+   
    ![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Images/Binary%20Classification%20(11).png)
 
-2) Few-Shot Results
+3) Few-Shot Results
 
    The few-shot experiment started with preparing the support with 500 examples (260 regional biases and 240 non-regional biases), with lower precision and F1-score values in comparison to the zero-shot score in both
    classes.
@@ -112,19 +89,19 @@ Eight prominent LLMs were selected for their instruction-following and reasoning
    
       • 4-bit quantisation, necessary for the few-shot method, severely degraded the model’s reasoning and destroyed performance.
 
-   We conducted the few-shot experiments with a smaller number of support (different combinations of regional biases and non-regional biases) on a smaller dataset of 1000 comments.
+   We conducted the few-shot experiments with a smaller number of support (different combinations of regional biases and non-regional biases) on a smaller dataset of 1000 comments. The codes for which are available in the folder named Qwen_3_8b, which is in https://github.com/debby123p/CAN-LARGE-LANGUAGE-MODELS-DETECT-INDIAN-REGIONAL-BIAS-DATASET-ANALYSIS/tree/main/few-shot.
 
    ![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Images/Binary%20Classification%20(13).png)
 
-   After looking through the inferences of the above experiment, we proceeded with experiments on the entire dataset with the type of support we have provided in Exp-2, Exp-3, and Exp-4, as we got improved performances in    comparison to the zero-shot results.
+   After looking through the inferences of the above experiment, we proceeded with experiments on the entire dataset with the type of support we have provided in Exp-2, Exp-3, and Exp-4, as we got improved performances in    comparison to the zero-shot results. The codes for which are available in the folder named Qwen_3_8b_entire_dataset, which is in https://github.com/debby123p/CAN-LARGE-LANGUAGE-MODELS-DETECT-INDIAN-REGIONAL-BIAS-DATASET-ANALYSIS/tree/main/few-shot.
 
    ![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Images/Binary%20Classification%20(14).png)
 
    This few-shot strategy is a complete failure. In all the experiments, the Zero-Shot setting is significantly better and more balanced than the few-shot setting.
 
-3) Fine-Tuning Results
+4) Fine-Tuning Results
 
-   Fine-tuned Qwen emerged as the absolute best performer, achieving high reliability with F1-scores nearing 0.90 for both bias categories. Fine-tuned Mistral showed only minor improvements over its zero-shot (e.g., 0.61     to 0.65 F1), demonstrating far less adaptability to this specific task compared to Qwen.
+   Fine-tuned Qwen emerged as the absolute best performer, achieving high reliability with F1-scores nearing 0.90 for both bias categories. Fine-tuned Mistral showed only minor improvements over its zero-shot (e.g., 0.61 to 0.65 F1), demonstrating far less adaptability to this specific task compared to Qwen. The codes for which are available in the folder named binary-classification, which is in https://github.com/debby123p/CAN-LARGE-LANGUAGE-MODELS-DETECT-INDIAN-REGIONAL-BIAS-DATASET-ANALYSIS/tree/main/fine-tuning.
 
    ![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Images/Binary%20Classification%20(15).png)
 
@@ -133,9 +110,9 @@ Eight prominent LLMs were selected for their instruction-following and reasoning
 1) Zero-Shot Results
 
    The zero-shot model fails to distinguish between severity levels. It heavily over-predicts “Mild” cases while missing the vast majority of “Moderate” and “Severe” instances. This can be seen by the critically low
-   F1-      scores of 0.20 and 0.15, respectively.
+   F1-scores of 0.20 and 0.15, respectively. The code that is available in the folder named zero-shot-multi-class-classification, which is in https://github.com/debby123p/CAN-LARGE-LANGUAGE-MODELS-DETECT-INDIAN-REGIONAL-BIAS-DATASET-ANALYSIS/tree/main/zero_shot.
 
-   ![image](https://github.com/debby123p/IndiRegBias-A-Benchmark-Dataset-for-Regional-Bias-Detection-in-Indian-Language-Models/blob/main/Images/Binary%20Classification%20(16).png)
+   ![image](https://github.com/debby123p/CAN-LARGE-LANGUAGE-MODELS-DETECT-INDIAN-REGIONAL-BIAS-DATASET-ANALYSIS/blob/main/Images/Screenshot%20from%202025-12-08%2015-39-15.png)
 
 3) Few-Shot Results
 
